@@ -54,16 +54,59 @@ The project is divided into several key directories and files:
 3. Set up environment variables:
    Create a `.env` file in the api directory with the following variables:
    ```env
-   ELASTIC_CLUSTER=your_elastic_cluster_url
-   ELASTIC_SEARCH_INDEX=your_index_name
-   ELASTIC_API_KEY=your_elastic_api_key
-   AZURE_API_KEY=your_azure_api_key
-   AZURE_EMBEDDING_RESOURCE_NAME=your_embedding_resource_name
-   AZURE_EMBEDDING_DEPLOYMENT_ID=your_embedding_deployment_id
-   AZURE_EMBEDDING_API_VERSION=your_embedding_api_version
-   AZURE_COMPLETION_RESOURCE_NAME=your_completion_resource_name
-   AZURE_COMPLETION_DEPLOYMENT_ID=your_completion_deployment_id
-   AZURE_COMPLETION_API_VERSION=your_completion_api_version
+   # URL to download the CSV file containing art gallery data
+   ARTGALLERYCSV=https://data.cityofnewyork.us/api/views/43hw-uvdj/rows.csv?date=20241016&accessType=DOWNLOAD
+
+   # URL of your Elasticsearch cluster
+   ELASTIC_CLUSTER=https://your-elastic-cluster-url
+
+   # API key for accessing your Elasticsearch cluster
+   ELASTIC_API_KEY=your-elastic-api-key
+
+   # Name of the Elasticsearch index to use
+   ELASTIC_SEARCH_INDEX=nyc-art-galleries
+
+   # Field in Elasticsearch to store vector embeddings
+   ELASTIC_VECTOR_FIELD=embedding
+
+   # Model ID for the embedding model in Elasticsearch
+   ELASTIC_EMBEDDING_MODEL_ID=azure_openai_embeddings
+
+   # Model ID for the completion model in Elasticsearch
+   ELASTIC_COMPLETION_MODEL_ID=azure_openai_completions
+
+   # Model ID for the inference pipeline in Elasticsearch
+   ELASTIC_INFERENCE_PIPELINE_MODEL_ID=inferences_pipeline
+
+   # Base URL for your Azure OpenAI endpoint
+   ENDPOINT_BASE=https://your-azure-openai-endpoint
+
+   # Full URL for your Azure OpenAI deployment
+   ENDPOINT=https://your-azure-openai-endpoint/openai/deployments/your-deployment-id/chat/completions?api-version=your-api-version
+
+   # API key for accessing Azure OpenAI
+   AZURE_API_KEY=your-azure-api-key
+
+   # Resource name for the Azure embedding model
+   AZURE_EMBEDDING_RESOURCE_NAME=your-embedding-resource-name
+
+   # Deployment ID for the Azure embedding model
+   AZURE_EMBEDDING_DEPLOYMENT_ID=your-embedding-deployment-id
+
+   # Resource name for the Azure completion model
+   AZURE_COMPLETION_RESOURCE_NAME=your-completion-resource-name
+
+   # Deployment ID for the Azure completion model
+   AZURE_COMPLETION_DEPLOYMENT_ID=your-completion-deployment-id
+
+   # API version for the Azure embedding model
+   AZURE_EMBEDDING_API_VERSION=2023-05-15
+
+   # API version for the Azure completion model
+   AZURE_COMPLETION_API_VERSION=2024-08-01-preview
+
+   # Assistant ID for Azure OpenAI Assistants API
+   ASSISTANT_ID=your-assistant-id
    ```
 
 ### Running the Application
