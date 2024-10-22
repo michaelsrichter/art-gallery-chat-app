@@ -173,7 +173,6 @@ async function* submitToolOutputs(openai, toolOutputs, runId, threadId) {
     );
     for await (const chunk of asyncStream) {
       const { event, data } = chunk;
-      // console.log({ event, data });
       if (event === "thread.message.delta") {
         // stream message back to UI
         const { delta } = data;
@@ -181,9 +180,6 @@ async function* submitToolOutputs(openai, toolOutputs, runId, threadId) {
         if (delta) {
           const value = delta.content[0]?.text?.value || "";
           yield value;
-          console.log("Processed thread.message.delta (tool output)", {
-            value,
-          });
         }
       }
       // else if ... handle the other events as needed
