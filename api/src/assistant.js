@@ -1,32 +1,14 @@
 require("dotenv/config");
 const { AzureOpenAI } = require("openai");
-const {
-  DefaultAzureCredential,
-  getBearerTokenProvider,
-} = require("@azure/identity");
-
 const { vectorSearch } = require("./elastic-config");
 
 const { ASSISTANT_ID, AZURE_COMPLETION_DEPLOYMENT_ID } = process.env;
 
-// Important: Errors handlings are removed intentionally. If you are using this sample in production
-// please add proper error handling.
-
 async function initAzureOpenAI(context) {
-  console.log("Using Azure OpenAI (w/ Microsoft Entra ID) ...");
-  const credential = new DefaultAzureCredential();
-  const azureADTokenProvider = getBearerTokenProvider(
-    credential,
-    "https://cognitiveservices.azure.com/.default"
-  );
-
   return new AzureOpenAI({
     endpoint: process.env.ENDPOINT_BASE,
     apiKey: process.env.AZURE_API_KEY,
     apiVersion: process.env.AZURE_COMPLETION_API_VERSION,
-  });
-  return new AzureOpenAI({
-    azureADTokenProvider,
   });
 }
 
@@ -37,7 +19,6 @@ const assistantDefinition = {
     "You will be able to call a function that searches over 900 art galleries in New York City to help you respond to the user's query. " + 
     "Only use the functions you have been provideded with. Feel free to ask the user for more information if needed and suggested similar art or exhibits they might be interested in. " +
     "Do not respond to any requets that are not related to art, museums or art galleries in New York City. Kindly tell the user that you cannot help with that function. ",
-
   tools: [
     {
       type: "function",
@@ -107,7 +88,7 @@ async function* processQuery(userQuery, threadId = null) {
       //yield "@queued";
       console.log("Processed thread.run.queued");
     } else if (event === "thread.run.in_progress") {
-      yield "--START--";
+      yield "@";
       console.log("Processed thread.run.in_progress");
     } else if (event === "thread.message.delta") {
       const delta = data.delta;
