@@ -15,7 +15,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const callAssistant = (message) => {
     // Get threadId from sessionStorage
     const threadId = sessionStorage.getItem("threadId");
-    let url = "http://localhost:7071/api/art-assistant";
+    let url = "/api/art-assistant";
 
     if (threadId && threadId.trim() !== "") {
       url += `?threadId=${encodeURIComponent(threadId.trim())}`;

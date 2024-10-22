@@ -1,0 +1,21 @@
+{
+  "name": "chat-app-function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/functions": "^4.5.1",
+    "@azure/identity": "^4.5.0",
+    "@elastic/elasticsearch": "^8.15.0",
+    "axios": "^1.7.7",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "openai": "^4.67.3"
+  }
+}
