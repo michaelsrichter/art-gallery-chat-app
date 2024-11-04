@@ -13,7 +13,7 @@ app.http("art-assistant", {
     const query = await request.text();
     return {
       headers: {
-        "Content-Type": "application/octet-stream",
+        "Content-Type": "text/plain",
         "Transfer-Encoding": "chunked",
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Methods": "POST",
