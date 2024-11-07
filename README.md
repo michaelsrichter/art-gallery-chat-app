@@ -1,5 +1,7 @@
 # NYC Art Gallery Chatbot
 
+See the live demo at [https://art.richtercloud.com](https://art.richtercloud.com/)
+
 ## Introduction
 
 This project is a demo web app designed to highlight the benefits of Elasticsearch's integration with Azure AI services. The app is a bot assistant that helps users find art galleries in New York City. It leverages the power of Azure OpenAI and Elasticsearch to provide intelligent search capabilities and interactive chatbot functionalities.

@@ -1,5 +1,7 @@
 # NYC Art Gallery Chatbot with Azure OpenAI and Elasticsearch
 
+See the live demo at [https://art.richtercloud.com](https://art.richtercloud.com/)
+
 This repository contains the code and documentation for a conversational chatbot designed to help users explore art galleries in New York City. Built with a combination of **Azure OpenAI**, **Elasticsearch**, **Node.js**, and **React**, this solution demonstrates how to leverage Elasticsearch's AI integration capabilities to create a rich, interactive user experience. The chatbot can answer questions about galleries, provide descriptions, and surface relevant gallery information using both semantic search and natural language generation.
 
 ### Solution Overview
