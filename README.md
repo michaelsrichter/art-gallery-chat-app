@@ -1,8 +1,11 @@
-# NYC Art Gallery Chat App
+# NYC Art Gallery Chatbot
 
 ## Introduction
 
-This project is a comprehensive web application designed to assist users in finding art galleries in New York City. It leverages the power of Azure OpenAI and Elasticsearch to provide intelligent search capabilities and interactive chatbot functionalities.
+This project is a demo web app designed to highlight the benefits of Elasticsearch's integration with Azure AI services. The app is a bot assistant that helps users find art galleries in New York City. It leverages the power of Azure OpenAI and Elasticsearch to provide intelligent search capabilities and interactive chatbot functionalities.
+
+## Solution Overview
+Read the [Solution Overview](/Solution.md) here.
 
 ## Features
 
@@ -36,14 +39,18 @@ The project is divided into several key directories and files:
 - Node.js
 - npm
 - Azure account
+   - An Azure OpenAI instance with a Chat Completion model deployed
+   - A Static Web App (if deploying to the cloud)
 - Elasticsearch cluster
 
 ### Installation
 
+> Note that this sample code does not automate the deployment of any of the services (Azure OpenAI, Static Web App, ElasticSearch). The services need to be pre-existing and you will need the relevant API keys for the configuration.
+
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/project-name.git
-   cd project-name
+   git https://github.com/michaelsrichter/art-gallery-chat-app.git
+   cd art-gallery-chat-app
    ```
 
 2. Install dependencies:
@@ -53,7 +60,7 @@ The project is divided into several key directories and files:
 
 3. Set up environment variables:
    Create a `.env` file in the api directory with the following variables:
-   ```env
+   ```sh
    # URL to download the CSV file containing art gallery data
    ARTGALLERYCSV=https://data.cityofnewyork.us/api/views/43hw-uvdj/rows.csv?date=20241016&accessType=DOWNLOAD
 
@@ -128,33 +135,13 @@ The project is divided into several key directories and files:
 ### Running with Azure Static Web Apps CLI
 To run the application using the Azure Static Web Apps CLI, follow these steps:
 
-## Available Scripts
-
-### [`npm start`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fhome%2Fmike%2Fprojects%2Felastic%2Fart%2Fchat-app%2FREADME.md%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A8%2C%22character%22%3A5%7D%7D%5D%2C%22381933db-54ad-4481-8270-11e4caa67333%22%5D "Go to definition")
-
-Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### [`npm test`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fhome%2Fmike%2Fprojects%2Felastic%2Fart%2Fchat-app%2FREADME.md%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A16%2C%22character%22%3A5%7D%7D%5D%2C%22381933db-54ad-4481-8270-11e4caa67333%22%5D "Go to definition")
-
-Launches the test runner in interactive watch mode.
-
-### [`npm run build`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fhome%2Fmike%2Fprojects%2Felastic%2Fart%2Fchat-app%2FREADME.md%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A21%2C%22character%22%3A5%7D%7D%5D%2C%22381933db-54ad-4481-8270-11e4caa67333%22%5D "Go to definition")
-
-Builds the app for production to the build folder.
-
-### [`npm run eject`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fhome%2Fmike%2Fprojects%2Felastic%2Fart%2Fchat-app%2FREADME.md%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A31%2C%22character%22%3A5%7D%7D%5D%2C%22381933db-54ad-4481-8270-11e4caa67333%22%5D "Go to definition")
-
-Ejects the configuration files and dependencies for customization.
-
-## Learn More
-
-To learn more about the tools and technologies used in this project, check out the following resources:
-
-- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)
-- [React Documentation](https://reactjs.org/)
-- [Azure OpenAI Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/openai/)
-- [Elasticsearch Documentation](https://www.elastic.co/guide/index.html)
+1. Install the Static Web Apps CLI tool from [here](https://azure.github.io/static-web-apps-cli/docs/use/install/).
+2. Run 
+   ```sh
+   npm run build && swa start build --api-location api
+   ```
+3. Open [http://localhost:4280](http://localhost:4280) in your browser.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
