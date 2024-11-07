@@ -79,7 +79,10 @@ async function* processQuery(userQuery, threadId = null) {
   for await (const chunk of run) {
     const { event, data } = chunk;
 
-    console.log("processing event", { event, data });
+    //only log if the event is not thread.run.step.delta
+    if (event !== "thread.run.step.delta") {
+      console.log("processing event", { event, data });
+    }
 
     if (event === "thread.run.created") {
       yield thread.id;
@@ -119,6 +122,7 @@ async function* handleRequiresAction(openai, run, runId, threadId) {
     const toolOutputs = await Promise.all(
       run.required_action.submit_tool_outputs.tool_calls.map(
         async (toolCall) => {
+          console.log("Processing tool call:", JSON.stringify(toolCall));
           if (toolCall.function.name === "artGallerySearch") {
             return {
               tool_call_id: toolCall.id,
@@ -146,7 +150,6 @@ async function* handleRequiresAction(openai, run, runId, threadId) {
 async function* submitToolOutputs(openai, toolOutputs, runId, threadId) {
   try {
     // Use the submitToolOutputsStream helper
-    console.log("Call Tool output and stream the response");
     const asyncStream = openai.beta.threads.runs.submitToolOutputsStream(
       threadId,
       runId,

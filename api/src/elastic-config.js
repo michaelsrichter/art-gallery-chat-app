@@ -240,4 +240,4 @@ async function init()
 }
 
 
-module.exports = { vectorSearch };
+module.exports = { vectorSearch, init };
