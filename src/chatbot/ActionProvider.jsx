@@ -2,39 +2,43 @@
 import React from "react";
 import { marked } from "marked";
 
+// ActionProvider component to handle chatbot actions
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
+  // Function to update the last message in the state
   const updateLastMessage = (message) => {
     setState((prev) => {
       return {
         ...prev,
         messages: [
-          ...prev.messages.slice(0, -1),
-          { ...prev.messages.at(-1), message },
+          ...prev.messages.slice(0, -1), // Remove the last message
+          { ...prev.messages.at(-1), message }, // Add the updated message
         ],
       };
     });
   };
 
+  // Function to manipulate the last message in the state
   const manipulateLastMessage = () => {
     setState((prev) => {
-      const lastMessage = prev.messages.at(-1);
+      const lastMessage = prev.messages.at(-1); // Get the last message
       const manipulatedMessage = {
         ...lastMessage,
-        message: convertMessageToHtml(lastMessage.message),
+        message: convertMessageToHtml(lastMessage.message), // Convert message to HTML
       };
       return {
         ...prev,
-        messages: [...prev.messages.slice(0, -1), manipulatedMessage],
+        messages: [...prev.messages.slice(0, -1), manipulatedMessage], // Update the state with manipulated message
       };
     });
   };
 
+  // Function to convert a message to HTML using marked library
   const convertMessageToHtml = (message) => {
-    const htmlContent = marked.parse(message.trim());
-    return  <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    const htmlContent = marked.parse(message.trim()); // Parse the message to HTML
+    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />; // Return HTML content
+  };
 
-  }
-
+  // Function to add a new message to the state
   const addMessageToState = (botMessage) => {
     setState((prev) => ({
       ...prev,
@@ -66,7 +70,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       let threadIdBuffer = "";
       let threadIdCaptured = false;
 
-      addMessageToState(createChatBotMessage("streaming...")); //You need a dummy message to update
+      addMessageToState(createChatBotMessage("thinking...")); //You need a dummy message to update
       while (!done) {
         ({ done, value } = await reader.read());
         const chunk = decoder.decode(value);
@@ -75,7 +79,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             if (char === "@") {
               threadIdCaptured = true;
               sessionStorage.setItem("threadId", threadIdBuffer);
-              console.log(threadIdBuffer)
+              console.log(threadIdBuffer);
             } else if (!threadIdCaptured) {
               threadIdBuffer += char;
             } else {
@@ -92,23 +96,6 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       }
       manipulateLastMessage();
     });
-
-    /*
-      .then((response) => response.text())
-      .then((data) => {
-        const [threadId, content] = data.split("@START|");
-        const htmlContent = marked.parse(content.trim());
-        console.log(threadId)
-        sessionStorage.setItem("threadId", threadId.trim());
-
-        const botMessage = createChatBotMessage(
-          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        );
-        setState((prev) => ({
-          ...prev,
-          messages: [...prev.messages, botMessage],
-        }));
-      });*/
   };
 
   // Put the handleHello function in the actions object to pass to the MessageParser
