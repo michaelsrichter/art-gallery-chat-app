@@ -77,22 +77,26 @@ async function* processQuery(userQuery, threadId = null) {
 
   console.log("Step 5: Read streamed response", { run });
   for await (const chunk of run) {
+
     const { event, data } = chunk;
 
     //only log if the event is not thread.run.step.delta
     if (event !== "thread.run.step.delta") {
-      console.log("processing event", { event, data });
+      //console.log("processing event", { event, data });
     }
+    console.info("STEP DETAILS", JSON.stringify(data.step_details));
+
 
     if (event === "thread.run.created") {
       yield thread.id;
-      console.log("Processed thread.run.created");
+      
+
     } else if (event === "thread.run.queued") {
       //yield "@queued";
-      console.log("Processed thread.run.queued");
+      //console.log("Processed thread.run.queued");
     } else if (event === "thread.run.in_progress") {
       yield "@";
-      console.log("Processed thread.run.in_progress");
+      //console.log("Processed thread.run.in_progress");
     } else if (event === "thread.message.delta") {
       const delta = data.delta;
       if (delta) {
